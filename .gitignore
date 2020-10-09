@@ -1,5 +1,9 @@
 .gradle/
 build/
+.DS_Store
+gradle/
+gradlew
+gradlew.bat
 
 .idea/
 *.iml
