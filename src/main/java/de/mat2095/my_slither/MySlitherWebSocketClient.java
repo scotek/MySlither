@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
+import javax.swing.JOptionPane;
 
 
 final class MySlitherWebSocketClient extends WebSocketClient {
@@ -431,7 +432,6 @@ final class MySlitherWebSocketClient extends WebSocketClient {
             }
             cursorPosition += 7 + nameLength;
             rank++;
-
             view.setHighscoreData(rank - 1, name.toString(), model.getSnakeLength(bodyLength, fillAnount), ownRank == rank);
         }
     }
@@ -442,6 +442,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
             return;
         }
         int deathReason = data[3];
+        view.deathMessage();
         switch (deathReason) {
             case 0:
                 view.log("You died.");
