@@ -85,6 +85,18 @@ final class MySlitherJFrame extends JFrame {
         "64 - blue/black"
     };
 
+    private static final int[] SNAKECOLOURCODES = {
+        0x9400D3,
+        0x00BFFF,
+        0x00FFFF,
+        0x00FF00,
+        0xFFFF00,
+        0xFF8C00,
+        0xFA8072,
+        0xFF0000,
+        0xEE82EE
+    };
+
     // TODO: skins, prey-size, snake-length/width, bot-layer, that-other-thing(?), show ping
 
     private final JTextField server, name;
@@ -321,6 +333,9 @@ final class MySlitherJFrame extends JFrame {
     }
 
     private void connect() {
+
+        SetColour(); //set snake colour when user tries to connect to server
+
         new Thread(() -> {
             if (status != Status.DISCONNECTED) {
                 throw new IllegalStateException("Connecting while not disconnected");
@@ -447,4 +462,34 @@ final class MySlitherJFrame extends JFrame {
             this.allowModifyData = allowModifyData;
         }
     }
+
+    public void SetColour()
+    {
+        int selection = 0;
+        int selectedIndex = snake.getSelectedIndex(); //get chosen colour
+
+        if(selectedIndex < SNAKECOLOURCODES.length) //check if chosen colour is one of the supported colours
+        {
+            selection = SNAKECOLOURCODES[selectedIndex];
+            System.out.println(selection);
+        }else
+        {
+            canvas.ResetColour(); //if colour is not one of the supported colours then reset snake colour to default snake colour
+            return;
+        }
+
+        try{
+
+            Color selectedColour = new Color(selection);
+            canvas.SetColour(selectedColour);
+
+
+        }catch(NumberFormatException e) //if error with conversion to colour
+        {
+            System.out.println("Nooope " + e.toString());
+            //Do nothing
+        }
+
+    }
+
 }
