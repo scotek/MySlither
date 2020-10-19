@@ -26,3 +26,5 @@ Build the jar with `gradle clean shadowJar` and run that jar, or use `gradle run
 
 ### License
 This project is released under the GNU/GPLv3 License. See [LICENSE](LICENSE) for details.
+
+
