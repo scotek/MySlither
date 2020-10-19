@@ -539,7 +539,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
         view.setMap(map);
     }
 
-    private void processAddRemoveSnake(int[] data) {
+    private void processAddRemoveSnake(int[] data) { //snake data retrieved here from server
         if (data.length >= 31) {
             int id = (data[3] << 8) | (data[4]);
 
