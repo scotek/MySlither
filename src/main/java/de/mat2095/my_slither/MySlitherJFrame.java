@@ -85,7 +85,7 @@ final class MySlitherJFrame extends JFrame {
         "64 - blue/black"
     };
 
-    private static final int[] SNAKECOLOURCODES = {
+    private static final int[] SNAKECOLOURCODES = { //array of hex codes of supported colours
         0x9400D3,
         0x00BFFF,
         0x00FFFF,
@@ -448,8 +448,8 @@ final class MySlitherJFrame extends JFrame {
     }
     void deathMessage(){
         String l = Integer.toString( model.getSnakeLength(model.snake.body.size(), model.snake.getFam()));
-        String message = "You are dead!\nLength: " + l + "\nKills: " + killsC;
-        JOptionPane.showMessageDialog(this, message);
+        String message = "You are dead!\nRank: " + rank.getText() + "\nLength: " + l + "\nKills: " + killsC;
+        JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.WARNING_MESSAGE);
     }
     private enum Status {
         DISCONNECTED("connect", false, true, true),
