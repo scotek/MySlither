@@ -16,7 +16,7 @@ public final class Main {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-
+        //Here goes new Jframe tutorial
         new MySlitherJFrame().setVisible(true);
 
     }

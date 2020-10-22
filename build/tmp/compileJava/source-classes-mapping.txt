@@ -1,0 +1,31 @@
+de/mat2095/my_slither/SnakeBodyPart.java
+ de.mat2095.my_slither.SnakeBodyPart
+de/mat2095/my_slither/Player.java
+ de.mat2095.my_slither.Player
+ de.mat2095.my_slither.Player$Wish
+de/mat2095/my_slither/Snake.java
+ de.mat2095.my_slither.Snake
+de/mat2095/my_slither/Food.java
+ de.mat2095.my_slither.Food
+de/mat2095/my_slither/MySlitherWebSocketClient.java
+ de.mat2095.my_slither.MySlitherWebSocketClient
+de/mat2095/my_slither/MySlitherJFrame.java
+ de.mat2095.my_slither.MySlitherJFrame
+ de.mat2095.my_slither.MySlitherJFrame$1
+ de.mat2095.my_slither.MySlitherJFrame$2
+ de.mat2095.my_slither.MySlitherJFrame$3
+ de.mat2095.my_slither.MySlitherJFrame$4
+ de.mat2095.my_slither.MySlitherJFrame$5
+ de.mat2095.my_slither.MySlitherJFrame$6
+ de.mat2095.my_slither.MySlitherJFrame$Status
+de/mat2095/my_slither/MySlitherModel.java
+ de.mat2095.my_slither.MySlitherModel
+de/mat2095/my_slither/MySlitherCanvas.java
+ de.mat2095.my_slither.MySlitherCanvas
+ de.mat2095.my_slither.MySlitherCanvas$1
+ de.mat2095.my_slither.MySlitherCanvas$2
+ de.mat2095.my_slither.MySlitherCanvas$MouseInput
+de/mat2095/my_slither/Main.java
+ de.mat2095.my_slither.Main
+de/mat2095/my_slither/Prey.java
+ de.mat2095.my_slither.Prey

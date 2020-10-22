@@ -85,7 +85,17 @@ final class MySlitherJFrame extends JFrame {
         "64 - blue/black"
     };
 
-    // TODO: skins, prey-size, snake-length/width, bot-layer, that-other-thing(?), show ping
+    private static final int[] SNAKECOLOURCODES = { //array of hex codes of supported colours
+        0x9400D3,
+        0x00BFFF,
+        0x00FFFF,
+        0x00FF00,
+        0xFFFF00,
+        0xFF8C00,
+        0xFA8072,
+        0xFF0000,
+        0xEE82EE
+    };
 
     private final JTextField server, name;
     private final JComboBox<String> snake;
@@ -97,6 +107,7 @@ final class MySlitherJFrame extends JFrame {
     private final JScrollBar logScrollBar;
     private final JTable highscoreList;
     private final MySlitherCanvas canvas;
+    private String killsC = "";
 
     private final long startTime;
     private final Timer updateTimer;
@@ -260,10 +271,12 @@ final class MySlitherJFrame extends JFrame {
         logScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         logScrollPane.setPreferredSize(new Dimension(300, logScrollPane.getPreferredSize().height));
         logScrollBar = logScrollPane.getVerticalScrollBar();
+        //panel to change
         fullSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, logScrollPane, rightSplitPane);
         fullSplitPane.setDividerSize(fullSplitPane.getDividerSize() * 4 / 3);
         fullSplitPane.setResizeWeight(0.1);
 
+        //add to JFrame
         getContentPane().add(fullSplitPane, BorderLayout.CENTER);
 
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -321,6 +334,8 @@ final class MySlitherJFrame extends JFrame {
     }
 
     private void connect() {
+        SetColour(); //set snake colour when user tries to connect to server
+
         new Thread(() -> {
             if (status != Status.DISCONNECTED) {
                 throw new IllegalStateException("Connecting while not disconnected");
@@ -423,13 +438,19 @@ final class MySlitherJFrame extends JFrame {
 
     void setKills(int newKills) {
         kills.setText(String.valueOf(newKills));
+        killsC = Integer.toString(newKills);
     }
 
     void setHighscoreData(int row, String name, int length, boolean highlighted) {
         highscoreList.setValueAt(highlighted ? "<html><b>" + length + "</b></html>" : length, row, 0);
         highscoreList.setValueAt(highlighted ? "<html><b>" + name + "</b></html>" : name, row, 1);
-    }
 
+    }
+    void deathMessage(){
+        String l = Integer.toString( model.getSnakeLength(model.snake.body.size(), model.snake.getFam()));
+        String message = "You are dead!\nRank: " + rank.getText() + "\nLength: " + l + "\nKills: " + killsC;
+        JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.WARNING_MESSAGE);
+    }
     private enum Status {
         DISCONNECTED("connect", false, true, true),
         CONNECTING("connecting...", true, true, false),
@@ -446,5 +467,34 @@ final class MySlitherJFrame extends JFrame {
             this.buttonEnabled = buttonEnabled;
             this.allowModifyData = allowModifyData;
         }
+    }
+
+    public void SetColour()
+    {
+        int selection = 0;
+        int selectedIndex = snake.getSelectedIndex(); //get chosen colour
+
+        if(selectedIndex < SNAKECOLOURCODES.length) //check if chosen colour is one of the supported colours
+        {
+            selection = SNAKECOLOURCODES[selectedIndex];
+            System.out.println(selection);
+        }else
+        {
+            canvas.ResetColour(); //if colour is not one of the supported colours then reset snake colour to default snake colour
+            return;
+        }
+
+        try{
+
+            Color selectedColour = new Color(selection);
+            canvas.SetColour(selectedColour);
+
+
+        }catch(NumberFormatException e) //if error with conversion to colour
+        {
+            System.out.println("Nooope " + e.toString());
+            //Do nothing
+        }
+
     }
 }

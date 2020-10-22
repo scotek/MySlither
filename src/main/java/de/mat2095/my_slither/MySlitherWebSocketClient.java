@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
 import org.java_websocket.handshake.ServerHandshake;
+import javax.swing.JOptionPane;
 
 
 final class MySlitherWebSocketClient extends WebSocketClient {
@@ -441,6 +442,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
             return;
         }
         int deathReason = data[3];
+        view.deathMessage();
         switch (deathReason) {
             case 0:
                 view.log("You died.");
@@ -538,7 +540,7 @@ final class MySlitherWebSocketClient extends WebSocketClient {
         view.setMap(map);
     }
 
-    private void processAddRemoveSnake(int[] data) {
+    private void processAddRemoveSnake(int[] data) { //snake data retrieved here from server
         if (data.length >= 31) {
             int id = (data[3] << 8) | (data[4]);
 
