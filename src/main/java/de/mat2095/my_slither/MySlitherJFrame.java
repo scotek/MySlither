@@ -147,6 +147,7 @@ final class MySlitherJFrame extends JFrame {
         });
 
         connect = new JToggleButton();
+        connect.setFocusable(false);
         connect.addActionListener(a -> {
             switch (status) {
                 case DISCONNECTED:

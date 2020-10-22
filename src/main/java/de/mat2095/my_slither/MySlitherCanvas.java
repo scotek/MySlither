@@ -21,7 +21,7 @@ final class MySlitherCanvas extends JPanel {
     private static final Color BACKGROUND_COLOR = new Color(0x2B2B2B);
     private static final Color FOREGROUND_COLOR = new Color(0xA9B7C6);
     private static final Color SECTOR_COLOR = new Color(0x803C3F41, true);
-    private static final Color FOOD_COLOR = new Color(0xCC7832);
+    private static  Color FOOD_COLOR = new Color(0xCC7832);
     private static final Color PREY_COLOR = new Color(0xFFFF00);
     private static final float[] PREY_HALO_FRACTIONS = new float[]{0.5f, 1f};
     private static final Color[] PREY_HALO_COLORS = new Color[]{new Color(0x60FFFF00, true), new Color(0x00FFFF00, true)};
@@ -96,11 +96,13 @@ final class MySlitherCanvas extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                FOOD_COLOR = new Color(0xCC3287);
                 mouseInput.boost = true;
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                FOOD_COLOR = new Color(0xCC7832);
                 mouseInput.boost = false;
             }
 
@@ -262,12 +264,12 @@ final class MySlitherCanvas extends JPanel {
             g.setTransform(oldTransform);
 
             g.setColor(MAP_COLOR);
-            g.drawOval(w - 80, h - 80, 79, 79);
+            g.drawOval(w - 160, h - 160, 159, 159);
             boolean[] currentMap = map; // TODO: save map in model, set to null on reconnect
             if (currentMap != null) {
                 for (int i = 0; i < currentMap.length; i++) {
                     if (currentMap[i]) {
-                        g.fillRect((i % 80) + w - 80, (i / 80) + h - 80, 1, 1);
+                        g.fillRect((i * 2 % 160) + w - 160, (i * 2 / 80) + h - 160, 1  , 1);
                     }
                 }
             }
@@ -277,10 +279,10 @@ final class MySlitherCanvas extends JPanel {
                 oldStroke = g.getStroke();
                 g.setStroke(new BasicStroke(2));
                 g.draw(new Rectangle2D.Double(
-                    model.snake.x * 80 / (model.gameRadius * 2) - w / zoomScale / m * 40 + w - 80,
-                    model.snake.y * 80 / (model.gameRadius * 2) - h / zoomScale / m * 40 + h - 80,
-                    w / zoomScale / m * 80,
-                    h / zoomScale / m * 80
+                    model.snake.x * 160 / (model.gameRadius * 2) - w / zoomScale / m * 80 + w - 160,
+                    model.snake.y * 160 / (model.gameRadius * 2) - h / zoomScale / m * 80 + h - 160,
+                    w / zoomScale / m * 160,
+                    h / zoomScale / m * 160
                 ));
                 g.setStroke(oldStroke);
             }
